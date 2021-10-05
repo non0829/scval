@@ -1,0 +1,50 @@
+<%= stylesheet_link_tag 'registration', :media => "all" %>
+
+<%= form_with(model: @test) do |f| %>
+    <div class="form">
+        <h2>Problems</h2>
+        <div class="form_box">
+            <div class="field tag-field">
+                <%= f.collection_check_boxes(:tag_ids, Tag.all, :id, :name) do |tag| %>
+                    <div class="tag">
+                        <%= tag.label do %>
+                            <%= tag.check_box %>
+                            <%= tag.text %>
+                        <% end %>
+                    </div>
+                <% end %>
+            </div>
+
+            <div class="field">
+                <%= f.label :Title %>
+                <%= f.text_field :title %>
+            </div>
+
+            <div class="field">
+                <%= f.label :Content %>
+                <%= f.text_field :content %>
+            </div>
+
+            <div class="field">
+                <%= f.label :Advice %>
+                <%= f.text_field :advice %>
+            </div>
+
+            <div class="field">
+                <%= f.label :Image %>
+                <%= f.file_field :image %>
+            </div>
+
+            <div id="problems">
+                <div class="links">
+                    <%= link_to_add_association "Add Question",f,:problems %>
+                </div>
+            </div>
+        </div>
+
+        <div class="actions">
+            <p><%= f.submit "Create Test" %></p>
+        </div>
+    </div>
+
+<% end %>

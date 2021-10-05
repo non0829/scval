@@ -1,0 +1,38 @@
+.center-message {
+    color: white;
+    font-size: 40px;
+    padding-left: 10%;
+    padding-top: 130px;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+.sub-message {
+    color: white;
+    padding-left: 10%;
+    padding-top: 20px;
+    font-size: 24px;
+}
+
+.center-message span {
+    border: none;
+    margin: 0;
+    display: inline;
+    animation: text-color infinite;
+    animation-duration: 20s;
+    font-size: 48px;
+}
+
+@keyframes text-color {
+    0%, 15%, 100% {
+        color: rgba(8, 31, 241, 0.925);
+    }
+    25%, 40% {
+        color: rgba(172, 247, 34, 0.884);
+    }
+    50%, 65% {
+        color: rgba(0, 4, 255, 0.829);
+    }
+    75%, 90% {
+        color: rgba(238, 13, 13, 0.877);
+    }
+}

@@ -1,0 +1,229 @@
+* {
+    padding: 0;
+    margin: 0;
+    text-align: center;
+    box-sizing: border-box;
+    font-family: 'Noto Serif', serif;
+}
+
+body {
+    width: 100vw;
+}
+
+header .title {
+    position: fixed;
+    width: 200px;
+    height: 140px;
+    color: white;
+    background-color: rgba(58, 104, 131, 0.781);
+    font-size: 36px;
+    line-height: 140px;
+}
+
+header .rotate-message {
+    position: fixed;
+    left: -90px;
+    bottom: 0;
+    margin-bottom: 160px;
+    display: inline-block;
+    height: 10%;
+    color: black;
+    transform: rotate(-90deg);
+    font-size: 17px;
+    line-height: 10vw;
+}
+
+#about-button {
+    position: fixed;
+    right: 200px;
+    font-size: 20px;
+    height: 15vh;
+    line-height: 15vh;
+    border: none;
+    background-color: transparent;
+    transition: all 0.5s;
+    transform-origin: center;
+    opacity: 0.9;
+}
+
+#about-button:hover {
+    font-size: 23px;
+}
+
+.logined-title {
+    height: 15%;
+    line-height: 90px;
+    color: white;
+    background-color: rgba(39, 52, 54, 0.678);
+    position: fixed;
+    width: 100%;
+    z-index: 1;
+}
+
+header #menu-button {
+    position: fixed;
+    z-index: 1000;
+    right: 0;
+    height: 15%;
+    width: 100px;
+    background-color: transparent;
+    padding: 35px 0 0;
+    transition: all 0.5s;
+}
+
+header .clicked {
+    background-color: black !important;
+}
+
+header #menu-button:hover {
+    opacity: 0.8;
+}
+
+span {
+    display: block;
+    margin: 0 auto;
+    width: 30%;
+    border: 1.5px solid white;
+    margin-bottom: 7%;
+    border-radius: 20%;
+    transition: all 0.5s;
+}
+
+.first-bar-change {
+    transform: rotate(45deg) translateX(2px) translateY(6px);
+    width: 55%;
+    border: 2px solid white;
+}
+
+.second-bar-change {
+    display: none;
+}
+.third-bar-change {
+    transform: rotate(-45deg) translateX(2px) translateY(-6px);
+    width: 55%;
+    border: 2px solid white;
+}
+
+#hidden-menu {
+    transition: all 0.5s;
+    position: fixed;
+    z-index: 1;
+    width: 100%;
+    height: 100vh;
+    background-color: rgba(65, 60, 60, 0.842);
+}
+
+.disappear-right {
+    user-select: none;
+    transform: translateX(100vw);
+    opacity: 0;
+    z-index: -5;
+}
+
+#hidden-about {
+    transition: all 0.5s;
+    position: fixed;
+    z-index: 5;
+    color: white;
+    padding-top: 100px;
+    width: 100%;
+    height: 100vh;
+    background-color: rgba(70, 58, 58, 0.911);
+}
+
+#hidden-about p {
+    margin: 30px 0;
+}
+
+#hidden-about span {
+    color: yellow;
+    border: none;
+    display: inline;
+}
+
+.disappear-left {
+    user-select: none;
+    transform: translateX(-100vw);
+    opacity: 0;
+}
+
+#hidden-about-button {
+    border: none;
+    padding: 10px 30px;
+    border-radius: 10px;
+    transition: all 0.5s;
+    background: transparent;
+    opacity: 0.8;
+    font-size: 24px;
+    color: white;
+}
+
+#hidden-about-button:hover {
+    opacity: 1;
+    font-size: 32px;
+}
+
+.menu {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    height: 360px;
+    margin-top: 100px;
+}
+
+.menu a {
+    text-decoration: none;
+    width: 70%;
+    max-width: 280px;
+    font-size: 20px;
+    color: white;
+    padding: 7px;
+    border-radius: 20px;
+    transition: all 0.5s;
+}
+
+.menu a:hover {
+    color: rgb(224, 224, 182);
+    background-color: rgb(39, 34, 34);
+    box-shadow: 0 3px 3px rgba(105, 93, 93, 0.842);
+}
+
+.menu a:active {
+    box-shadow: none;
+    transform: translateY(3px);
+}
+
+.background {
+    width: 90%;
+    height: 85%;
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    z-index: -2;
+    background-size: cover;
+    background-position: center center;
+    animation-name: pictures;
+    animation-duration: 20s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+}
+
+@keyframes pictures {
+    0%, 15%, 100% {
+        background-image: url(https://cdn.pixabay.com/photo/2016/10/13/16/40/green-1738220_1280.jpg);
+    }
+    25%, 40% {
+        background-image: url(https://cdn.pixabay.com/photo/2019/03/12/12/47/people-4050698_1280.jpg);
+    }
+    50%, 65% {
+        background-image: url(https://media.istockphoto.com/photos/colorful-flags-against-blue-sky-picture-id476435651?k=20&m=476435651&s=612x612&w=0&h=hvzNE0j52TiU1UhPSmi36QJmWBQvsG-IGK0Ly8H7cp4=);
+    }
+    75%, 90% {
+        background-image: url(https://cdn.pixabay.com/photo/2018/02/23/19/56/background-3176447_1280.jpg);
+    }
+}
+
+main {
+    min-height: 100vh;
+}

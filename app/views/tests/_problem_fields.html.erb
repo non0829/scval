@@ -1,0 +1,11 @@
+<div class="nested-fields">
+        <p>Question</p>
+        <%= f.text_area :content, size: "30×4" %>
+        <p>Choices</p>
+    
+        <div class="links">
+            <%= link_to_add_association "Add choice",f,:choices %>
+            <%= link_to_remove_association "Delete Question", f %>
+        </div>
+
+</div>

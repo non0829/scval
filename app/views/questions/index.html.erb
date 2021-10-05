@@ -1,0 +1,51 @@
+<%= stylesheet_link_tag 'talk_list', :media => "all" %>
+<div class="screen">
+  <% if student_signed_in? %>
+    <h1 class="title">Question to Teachers</h1>
+    <%= link_to '先生に質問する', new_question_path %>
+    <%= link_to 'トップに戻る', user_display_index_path %>
+    <div class="talk-box">
+      <% @questions.each do |q| %>
+        <% if current_student.id = q.id %>
+        <div class="talk">
+          <div class="detail-container">
+            <p class="detail-item"><%= q.name %></p>
+            <p class="detail-item"><time datetime="<%= q.created_at %>">
+            <%= time_ago_in_words(q.created_at) %>前
+            </time></p>
+          </div>
+          <div class="talk-content">
+            <p>【 <%= q.title %> 】</p>
+            <p><%= q.content %></p>
+            <p><%= q.answer if q.answer? %></p>
+          </div>
+        </div>
+        <% end %>
+      <% end %>
+    </div>
+  <% else group_signed_in? %>
+    <h1 class="title">生徒からの質問</h1>
+    <div class="talk-box">
+      <% @questions.each do |q| %>
+        <% unless q.answer %>
+          <div class="talk">
+            <div class="detail-container">
+              <p class="detail-item"><%= q.name %></p>
+              <p class="detail-item"><time datetime="<%= q.created_at %>">
+              <%= time_ago_in_words(q.created_at) %>前
+              </time></p>
+            </div>
+            <div class="talk-content">
+              <p>【 <%= q.title %> 】</p>
+              <p><%= q.content %></p>
+            </div>
+            <div class="buttons answer">
+              <%= link_to '回答', edit_question_path(q.id) %>
+            </div>
+          </div>
+        <% end %>
+      <% end %>
+    </div>
+    <%= link_to 'トップに戻る', group_display_index_path %>
+  <% end %>
+</div>

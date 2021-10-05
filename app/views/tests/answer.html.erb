@@ -1,0 +1,31 @@
+<%= stylesheet_link_tag 'registration', :media => "all" %>
+
+<div class="form">
+    <div class="form_box">
+        <h2><%= @total_count %>問中<%= @right_count %>問正解</h2>
+        <h2>総得点 <%= @student.point %>点</h2>
+        <% @problems.each do |p| %>
+            <div class="nested-fields question_box">
+                <p class="question_content"><%= p.content %></p>
+                <div class="choices">
+                    <% @choices.each do |c| %>
+                        <% if p.id == c.problem_id %>
+                            <div class="question_choice">
+                                <% if c.is_answer %>
+                                    <p class="correct_answer"><%= c.content %></p>
+                                <% else %>
+                                    <p><%= c.content %></p>
+                                <% end %>
+                            </div>
+                        <% end %>
+                    <% end %>
+                </div>
+            </div>
+        <% end %>
+        <% if student_signed_in? %>
+            <div class="links">
+                <%= link_to 'Back Questions', tests_path %>
+            </div>
+        <% end %>
+    </div>
+</div>

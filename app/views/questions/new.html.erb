@@ -1,0 +1,21 @@
+<%= stylesheet_link_tag 'registration', :media => "all" %>
+
+<%= form_for @question do |q| %>
+    <div class="form">
+        <h2>先生に質問</h2>
+        <div class="form_box">
+            <div class="field">
+                <%= q.label :タイトル %>
+                <%= q.text_field :title %>
+            </div>
+
+            <div class="field">
+                <%= q.label :内容 %>
+                <%= q.text_field :content %>
+            </div>
+        </div>
+        <div class="actions">
+            <p><%= q.submit "投稿する" %></p>
+        </div>
+    </div>
+<% end %>

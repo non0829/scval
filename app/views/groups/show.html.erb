@@ -1,0 +1,13 @@
+<%= stylesheet_link_tag 'profile', :media => "all" %>
+
+<div class="box">
+    <div class="flex-container">
+        <h1 class="title">Profile</h1>
+        <p class="flex-item">Name: <%= @group.name %></p>
+        <p class="flex-item">Address: <%= @group.email %></p>
+        <p class="flex-item">GroupCode: <%= @group.code %></p>
+        <% if current_group.id == @group.id %>
+        <%= link_to "編集する", edit_group_registration_path %>
+        <% end %>
+    </div>
+</div>

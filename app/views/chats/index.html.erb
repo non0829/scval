@@ -1,0 +1,28 @@
+<%= stylesheet_link_tag 'talk_list', :media => "all" %>
+<div class="screen">
+  <h1 class="title">Contact to Students</h1>
+  <% if group_signed_in? %>
+  <%= link_to 'Add Contact', new_chat_path %>
+  <% end %>
+  <div class="talk-box">
+    <% @chats.each do |c| %>
+      <div class="talk">
+        <div class="detail-container">
+          <p class="detail-item"><%= c.name %></p>
+          <p class="detail-item"><time datetime="<%= c.created_at %>">
+          <%= time_ago_in_words(c.created_at) %>前
+          </time></p>
+        </div>
+        <div class="talk-content">
+          <p>【 <%= c.title %> 】</p>
+          <p><%= c.content %></p>
+        </div>
+        <% if group_signed_in? %>
+          <div class="buttons">
+            <%= link_to '編集', edit_chat_path(c.id) %>
+            <%= link_to '削除', chat_path(c.id), method: :delete %>
+          </div>
+        <% end %>
+      </div>
+    <% end %>
+  </div>

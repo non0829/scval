@@ -1,0 +1,16 @@
+<%= stylesheet_link_tag 'ranking', :media => "all" %>
+
+<div class="screen">
+    <h1>Ranking</h1>
+    <div class="box">
+        <%= @score.each_with_index do |s, index| %>
+            <% unless s[:point] == 0 %>
+                <div class="rank">
+                    <p><%= index + 1 %>位</p>
+                    <p>Team <%= s[:team] %></p>
+                    <p><%= s[:point] %> pt</p>
+                </div>
+            <% end %>
+        <% end %>
+    </div>
+</div>

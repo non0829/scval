@@ -1,0 +1,24 @@
+<%= stylesheet_link_tag 'profile', :media => "all" %>
+
+
+<div class="box">
+  <h1 class="page-name">Comment</h1>
+  <div class="flex-container">
+    <h1 class="content"><%= @talk.content %></h1>
+    <% @comments.each do |c| %>
+      <div class="comment">
+        <%= c.name %>
+        <%= c.content %>
+      </div>
+    <% end %>
+    <% if student_signed_in? || group_signed_in? %>
+      <%= form_with(model: [@talk, @comment], local: true) do |f| %>
+        <%= f.text_area :content %>
+        <%= button_tag type: "submit" do %>
+          <i class="far fa-comments icon"></i> 
+        <% end %>
+      <% end %>
+    <% end %>
+  </div>
+
+</div>

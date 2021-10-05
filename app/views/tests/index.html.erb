@@ -1,0 +1,44 @@
+<%= stylesheet_link_tag 'talk_list', :media => "all" %>
+
+<div class="screen">
+    <h1 class="title">Question</h1>
+    <% if group_signed_in? %>
+    <%= link_to '問題作成', new_test_path %>
+    <% end %>
+    <%= form_tag tests_path, method: :get, class: 'boards__searchForm' do %>
+    <%= select_tag :tag_id,
+                    options_from_collection_for_select(Tag.all, :id, :name, params[:tag_id]),
+                    {
+                    prompt: 'タグで検索',
+                    onchange: 'submit(this.form);'
+                    }
+    %>
+    <% end %>
+    <div class="talk-box">
+        <% @tests.each do |t| %>
+        <div class="talk">
+            <div class="talk-content flex-container">
+                <div class="flex-item">
+                    <%= image_tag t.image_url, size: "200x150" if t.image? %>
+                </div>
+                <div class="flex-item">
+                    <p class="question">【 <%= t.title %> 】</p>
+                    <p class="question"><%= t.content %></p>
+                    <p class="advice"><%= t.advice %></p>
+                </div>
+            </div>
+            <div class="buttons">
+                <% t.tags.each do |tag| %>
+                    <span class="tag">#<%= tag.name %></span>
+                <% end %>    
+                <% if group_signed_in? %>
+                    <%= link_to "問題一覧", test_path(t.id) %>
+                    <%= link_to "削除する", test_path(t.id), method: :delete %>
+                <% elsif student_signed_in? %>
+                    <%= link_to "回答する", test_path(t.id) %>
+                <% end %>
+            </div>
+        </div>
+        <% end %>
+    </div>
+</div>

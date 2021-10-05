@@ -1,0 +1,43 @@
+<%= stylesheet_link_tag 'talk_list', :media => "all" %>
+
+<div class="screen">
+  <h1 class="title">Free Talk</h1>
+  <%= link_to '話す', new_talk_path %>
+  <div class="talk-box">
+    <% @talks.each do |t| %>
+      <div class="talk">
+        <div class="detail-container">
+          <p class="detail-item"><%= t.name %></p>
+          <p class="detail-item"><time datetime="<%= t.created_at %>">
+          <%= time_ago_in_words(t.created_at) %>前
+          </time></p>
+        </div>
+        <div class="talk-content">
+          <p><%= t.content %></p>
+        </div>
+        <div class="buttons">
+          <% if group_signed_in? %>
+              <i class="fas fa-heart heart"></i><%= t.likes.count %>
+              <%= link_to 'コメントする', talk_comments_path(t.id) %>
+              <%= link_to '編集', edit_chat_path(t.id) %>
+              <%= link_to '削除', chat_path(t.id), method: :delete %>
+          <% elsif student_signed_in? %>
+            <% if current_student.already_liked?(t) %>
+              <%= link_to talk_like_path(id: t.id, talk_id: t.id), class: "good", method: :delete do %>
+              <i class="fas fa-heart"></i>
+              <% end %>
+              <%= t.likes.count %>
+              <%= link_to 'コメントする', talk_comments_path(t.id) %>
+            <% else %>
+              <%= link_to talk_likes_path(id: t.id, talk_id: t.id), class: "good", method: :post do %>
+                <i class="far fa-heart"></i>
+              <% end %>
+              <%= t.likes.count %>
+              <%= link_to 'コメントする', talk_comments_path(t.id) %>
+            <% end %>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>

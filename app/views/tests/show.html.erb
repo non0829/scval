@@ -1,0 +1,31 @@
+<%= stylesheet_link_tag 'registration', :media => "all" %>
+
+<%= form_with url: answer_test_path, method: :get do |form| %>
+    <div class="form">
+        <div class="form_box">
+            <h2><%= @test.title %></h2>
+            <h2><%= @test.content %></h2>
+            <% @problems.each do |p| %>
+                <div class="nested-fields question_box">
+                    <p class="question_content"><%= p.content %></p>
+                    <div class="choices">
+                        <% @choices.each do |c| %>
+                            <% if p.id == c.problem_id %>
+                                <div class="question_choice">
+                                    <%= form.radio_button( "quiz#{p.id}", c.is_answer ) %>
+                                    <%= form.label( "quiz#{p.id}_#{c.is_answer}", c.content ) %>
+                                </div>
+                            <% end %>
+                        <% end %>
+                    </div>
+                </div>
+            <% end %>
+            <% if student_signed_in? %>
+                <div class="links">
+                    <%= form.submit "回答" %>
+                </div>
+            <% end %>
+        </div>
+    </div>
+<% end %>
+

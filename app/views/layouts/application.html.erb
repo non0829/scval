@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Scval</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.14.0/css/all.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif:ital@1&display=swap" rel="stylesheet">
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body>
+    <header>
+      <% if group_signed_in? %>
+      <h1 class="logined-title">Scval for Group</h1>
+      <% elsif student_signed_in? %>
+      <h1 class="logined-title">Scval for Player</h1>
+      <% else %>
+      <h1 class="title">Scval</h1>
+      <button id="about-button">About Service</button>
+      <p class="rotate-message">--- make fun for daily life ---</p>
+      <% end %>
+      <div id="menu-button" class="clicked">
+        <span id="first-bar"></span>
+        <span id="second-bar"></span>
+        <span id="third-bar"></span>
+      </div>
+      <div id="hidden-menu" class="disappear-right">
+        <% if student_signed_in? %>
+          <div class="menu">
+            <%= link_to 'Top', user_display_index_path(current_student.id) %>
+            <%= link_to 'Profile', student_path(current_student.id) %>
+            <%= link_to 'Ranking', ranking_index_path %>
+            <%= link_to 'Sign Out', destroy_student_session_path, method: :delete %>
+          </div>
+        <% elsif group_signed_in? %>
+          <div class="menu">
+            <%= link_to 'Top', group_display_index_path(current_group.id) %>
+            <%= link_to 'Profile', group_path(current_group.id) %>
+            <%= link_to 'Ranking', ranking_index_path %>
+            <%= link_to 'Sign Out', destroy_group_session_path, method: :delete %>
+          </div>
+        <% else %>
+          <div class="menu">
+            <%= link_to 'Top', start_index_path %> 
+            <%= link_to 'Login for group', group_display_index_path %>
+            <%= link_to 'Login for user', user_display_index_path %> 
+          </div>
+        <% end %>
+      </div>
+      <div id="hidden-about" class="disappear-left">
+        <h1><span>Scval</span>とは</h1>
+        <p>学校での【 <span>祭</span> 】といえば、文化祭、体育祭があります。</p>
+        <p>勉強に関する【 <span>祭</span> 】があれば勉強も楽しめるのに。</p>
+        <h2><span>Sc</span>hool Festi<span>val</span></h2>
+        <p>勉強をもっと楽しくするためにテストの結果を<span>チーム戦</span>に！</p>
+        <p>先生と生徒をつなぐコミュニケーションサービスです！</p>
+        <p></p>
+        <button id="hidden-about-button">back</button>
+      </div>
+    </header>
+    <main>
+      <% unless student_signed_in? || group_signed_in? %>
+      <div class="background"></div>
+      <% end %>
+      <%= yield %>
+    </main>
+    <script>
+    const menuButton = document.getElementById('menu-button')
+    let hiddenMenu = document.getElementById('hidden-menu')
+    let hiddenAbout = document.getElementById('hidden-about')
+    let aboutButton = document.getElementById('about-button')
+    let hiddenAboutButton = document.getElementById('hidden-about-button')
+    let firstBar = document.getElementById('first-bar')
+    let secondBar = document.getElementById('second-bar')
+    let thirdBar = document.getElementById('third-bar')
+
+    menuButton.onclick = function() {
+        menuButton.classList.toggle('clicked')
+        hiddenMenu.classList.toggle('disappear-right')
+        firstBar.classList.toggle('first-bar-change')
+        secondBar.classList.toggle('second-bar-change')
+        thirdBar.classList.toggle('third-bar-change')
+    }
+
+    aboutButton.onclick = function() {
+        hiddenAbout.classList.remove('disappear-left')
+    }
+
+    hiddenAboutButton.onclick =  function() {
+        hiddenAbout.classList.add('disappear-left')
+    }
+    </script>
+  </body>
+</html>
