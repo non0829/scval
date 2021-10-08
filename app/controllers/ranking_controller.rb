@@ -4,7 +4,7 @@ class RankingController < ApplicationController
         if student_signed_in?
             @students = Student.where(group_code: current_student.group_code)
         else 
-            @students = Student.where(group_code: current_group.group_code)
+            @students = Student.where(group_code: current_group.code)
         end
         @score = [{
             team: 1,
