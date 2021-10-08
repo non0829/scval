@@ -1,7 +1,11 @@
 class RankingController < ApplicationController
 
     def index 
-        @students = Student.where(group_code: current_student.group_code)
+        if student_signed_in?
+            @students = Student.where(group_code: current_student.group_code)
+        else 
+            @students = Student.where(group_code: current_group.group_code)
+        end
         @score = [{
             team: 1,
             point: 0,

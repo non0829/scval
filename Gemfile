@@ -59,7 +59,10 @@ gem 'cloudinary'
 gem 'dotenv-rails'
 gem 'cocoon'
 gem 'jquery-rails'
+gem 'hirb'
+gem 'hirb-unicode'
 
 group :production do
   gem 'pg'
 end
+
