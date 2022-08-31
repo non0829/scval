@@ -8,6 +8,7 @@ Rails.application.routes.draw do
     registrations: 'groups/registrations',
   }
   resources :groups, only: [:show]
+
   resources :start, only: [:index]
   resources :chats, except: :show
   resources :talks, except: :show do 
